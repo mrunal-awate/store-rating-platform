@@ -92,3 +92,46 @@ exports.login = async (req, res) => {
     console.log(error);
   }
 };
+
+
+
+
+exports.changePassword = async (req, res) => {
+  try {
+
+    const { oldPassword, newPassword } = req.body;
+
+    const user = await pool.query(
+      "SELECT * FROM users WHERE id=$1",
+      [req.user.id]
+    );
+
+    const validPassword = await bcrypt.compare(
+      oldPassword,
+      user.rows[0].password
+    );
+
+    if (!validPassword) {
+      return res.status(400).json({
+        message: "Old password incorrect"
+      });
+    }
+
+    const hashedPassword = await bcrypt.hash(
+      newPassword,
+      10
+    );
+
+    await pool.query(
+      "UPDATE users SET password=$1 WHERE id=$2",
+      [hashedPassword, req.user.id]
+    );
+
+    res.json({
+      message: "Password updated successfully"
+    });
+
+  } catch (error) {
+    console.log(error);
+  }
+};
