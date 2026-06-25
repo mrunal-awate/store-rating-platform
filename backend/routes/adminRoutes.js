@@ -13,12 +13,39 @@ const {
   getStores
 } = require("../controllers/adminController");
 
+router.get(
+  "/dashboard",
+  authMiddleware,
+  roleMiddleware("ADMIN"),
+  getDashboard
+);
+
+router.post(
+  "/users",
+  authMiddleware,
+  roleMiddleware("ADMIN"),
+  addUser
+);
 
 router.post(
   "/stores",
   authMiddleware,
   roleMiddleware("ADMIN"),
   addStore
+);
+
+router.get(
+  "/users",
+  authMiddleware,
+  roleMiddleware("ADMIN"),
+  getUsers
+);
+
+router.get(
+  "/stores",
+  authMiddleware,
+  roleMiddleware("ADMIN"),
+  getStores
 );
 
 module.exports = router;

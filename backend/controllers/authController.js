@@ -135,3 +135,30 @@ exports.changePassword = async (req, res) => {
     console.log(error);
   }
 };
+
+
+exports.searchStores = async (req, res) => {
+
+  try {
+
+    const { keyword } = req.query;
+
+    const stores = await pool.query(
+      `
+      SELECT *
+      FROM stores
+
+      WHERE
+      name ILIKE $1
+      OR
+      address ILIKE $1
+      `,
+      [`%${keyword}%`]
+    );
+
+    res.json(stores.rows);
+
+  } catch (error) {
+    console.log(error);
+  }
+};

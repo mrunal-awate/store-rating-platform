@@ -107,3 +107,65 @@ exports.addStore = async (req, res) => {
     console.log(error);
   }
 };
+
+exports.getUsers = async (req, res) => {
+
+  try {
+
+    const users =
+      await pool.query(
+        `SELECT
+         id,
+         name,
+         email,
+         address,
+         role
+         FROM users
+         ORDER BY id DESC`
+      );
+
+    res.json(users.rows);
+
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+
+exports.getStores = async (req, res) => {
+
+  try {
+
+    const stores =
+      await pool.query(
+        `
+        SELECT
+        s.*,
+
+        COALESCE(
+          ROUND(
+            AVG(r.rating),
+            1
+          ),
+          0
+        ) AS average_rating
+
+        FROM stores s
+
+        LEFT JOIN ratings r
+        ON s.id = r.store_id
+
+        GROUP BY s.id
+
+        ORDER BY s.id DESC
+        `
+      );
+
+    res.json(
+      stores.rows
+    );
+
+  } catch (error) {
+    console.log(error);
+  }
+};
