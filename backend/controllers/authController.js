@@ -162,3 +162,43 @@ exports.searchStores = async (req, res) => {
     console.log(error);
   }
 };
+
+
+exports.updateRating =
+async (req, res) => {
+
+  try {
+
+    const { id } = req.params;
+
+    const { rating } = req.body;
+
+    const updated =
+      await pool.query(
+        `
+        UPDATE ratings
+
+        SET rating=$1
+
+        WHERE
+        id=$2
+        AND
+        user_id=$3
+
+        RETURNING *
+        `,
+        [
+          rating,
+          id,
+          req.user.id
+        ]
+      );
+
+    res.json(
+      updated.rows[0]
+    );
+
+  } catch (error) {
+    console.log(error);
+  }
+};
