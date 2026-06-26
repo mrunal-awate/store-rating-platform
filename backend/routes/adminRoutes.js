@@ -10,7 +10,8 @@ const {
   addUser,
   addStore,
   getUsers,
-  getStores
+  getStores,
+  searchUsers,
 } = require("../controllers/adminController");
 
 router.get(
@@ -46,6 +47,13 @@ router.get(
   authMiddleware,
   roleMiddleware("ADMIN"),
   getStores
+);
+
+router.get(
+  "/users/search",
+  authMiddleware,
+  roleMiddleware("ADMIN"),
+  searchUsers
 );
 
 module.exports = router;

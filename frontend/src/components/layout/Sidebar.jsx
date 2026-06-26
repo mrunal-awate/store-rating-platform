@@ -45,6 +45,13 @@ function Sidebar() {
                             >
                                 Stores
                             </Link>
+
+                            <Link
+                                to="/admin/add-store"
+                                className="px-6 py-3 hover:bg-slate-700"
+                            >
+                                Add Store
+                            </Link>
                         </>
                     )
                 }

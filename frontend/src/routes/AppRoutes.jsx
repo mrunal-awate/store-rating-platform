@@ -8,6 +8,7 @@ import OwnerDashboard from "../pages/owner/OwnerDashboard";
 import Users from "../pages/admin/Users";
 import Stores from "../pages/admin/Stores";
 import AddUser from "../pages/admin/AddUser";
+import AddStore from "../pages/admin/AddStore";
 
 function AppRoutes() {
   return (
@@ -20,8 +21,8 @@ function AppRoutes() {
       <Route path="/owner" element={<OwnerDashboard />} />
       <Route path="/admin/users" element={<Users />} />
       <Route path="/admin/stores" element={<Stores />} />
-      <Route path="/admin/add-user" element={<AddUser />}
-/>
+      <Route path="/admin/add-user" element={<AddUser />}/>
+      <Route path="/admin/add-store" element={<AddStore />}/>
     </Routes>
   );
 }

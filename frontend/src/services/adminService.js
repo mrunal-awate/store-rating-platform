@@ -20,6 +20,11 @@ export const addUser = async (userData) => {
   return response.data;
 };
 
+export const addStore = async (storeData) => {
+    const response = await api.post("/admin/stores", storeData);
+    return response.data;
+};
+
 // export const updateUser = async (userId, userData) => {
 //   const response = await api.put(`/admin/users/${userId}`, userData);
 //   return response.data;
