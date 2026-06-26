@@ -25,6 +25,16 @@ export const addStore = async (storeData) => {
     return response.data;
 };
 
+export const searchUsers = async (search) => {
+  const response = await api.get(`/admin/users/search?search=${search}`);
+  return response.data;
+};
+
+export const searchStores = async (search) => {
+  const response = await api.get(`/admin/stores/search?search=${search}`);
+  return response.data;
+};
+
 // export const updateUser = async (userId, userData) => {
 //   const response = await api.put(`/admin/users/${userId}`, userData);
 //   return response.data;

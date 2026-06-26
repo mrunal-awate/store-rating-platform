@@ -201,3 +201,35 @@ exports.searchUsers = async (req, res) => {
     });
   }
 };
+
+exports.searchStores = async (req, res) => {
+  try {
+    const { search = "" } = req.query;
+
+    const stores = await pool.query(
+      `
+      SELECT
+        id,
+        name,
+        email,
+        address
+      FROM stores
+      WHERE
+        LOWER(name) LIKE LOWER($1)
+        OR LOWER(email) LIKE LOWER($1)
+        OR LOWER(address) LIKE LOWER($1)
+      ORDER BY id DESC
+      `,
+      [`%${search}%`]
+    );
+
+    res.json(stores.rows);
+
+  } catch (error) {
+    console.error(error);
+
+    res.status(500).json({
+      message: "Server Error",
+    });
+  }
+};
