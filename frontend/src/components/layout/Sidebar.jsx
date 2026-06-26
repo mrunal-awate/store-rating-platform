@@ -33,6 +33,13 @@ function Sidebar() {
                             </Link>
 
                             <Link
+                                to="/admin/add-user"
+                                className="px-6 py-3 hover:bg-slate-700"
+                            >
+                                Add User
+                            </Link>
+
+                            <Link
                                 className="px-6 py-3 hover:bg-slate-700"
                                 to="/admin/stores"
                             >

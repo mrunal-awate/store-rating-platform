@@ -7,6 +7,7 @@ import UserDashboard from "../pages/user/UserDashboard";
 import OwnerDashboard from "../pages/owner/OwnerDashboard";
 import Users from "../pages/admin/Users";
 import Stores from "../pages/admin/Stores";
+import AddUser from "../pages/admin/AddUser";
 
 function AppRoutes() {
   return (
@@ -19,6 +20,8 @@ function AppRoutes() {
       <Route path="/owner" element={<OwnerDashboard />} />
       <Route path="/admin/users" element={<Users />} />
       <Route path="/admin/stores" element={<Stores />} />
+      <Route path="/admin/add-user" element={<AddUser />}
+/>
     </Routes>
   );
 }
